@@ -7,13 +7,18 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "format": "prettier --write --list-different .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "lint": "eslint --fix .",
+    "lint:check": "eslint ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.1.0",
+    "globals": "^17.4.0",
     "prettier": "^3.8.1",
     "vitest": "^4.1.0"
   }

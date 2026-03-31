@@ -1,0 +1,54 @@
+name: Static Checks
+
+on:
+  pull_request:
+
+jobs:
+  prettier-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify formatting
+        run: npm run format:check
+
+  eslint:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint and report new issues
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-check
+          filter_mode: added
+          fail_level: error
+          level: warning
+          eslint_flags: "."
