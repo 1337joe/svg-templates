@@ -1,0 +1,156 @@
+:root {
+  --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  --text: #000;
+  --muted: #666;
+  --button: #007acc;
+  --button-hover: #005f99;
+
+  --background: #e1fdff;
+  --main-background: #fff;
+  --border: #ccc;
+  --footer-background: #f0f0f0;
+  --footer-link: #007acc;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  color: var(--text, #000);
+  background-color: var(--background);
+  padding: 1rem;
+  padding-bottom: 3.5rem; /* space for fixed footer */
+}
+
+main {
+  max-width: 800px;
+  background: var(--main-background);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  font-size: 1.5rem;
+}
+
+p {
+  margin-top: 0;
+  color: var(--muted);
+}
+
+input,
+button,
+a.button {
+  font: inherit;
+}
+
+form {
+  margin-bottom: 1rem;
+}
+
+form > fieldset {
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  margin: 0;
+  margin-bottom: 1rem;
+  padding-bottom: 0;
+}
+
+form > fieldset > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+form > div.button-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+form button,
+a.button {
+  border: 0;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: var(--button);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+form button:hover,
+a.button:hover {
+  background-color: var(--button-hover);
+}
+
+@media (min-width: 450px) {
+  form > fieldset > div {
+    grid-template-columns: 10rem minmax(8rem, 1fr);
+  }
+
+  form > div.button-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+div#templateContainer,
+div#instructions {
+  margin-top: 1rem;
+}
+
+svg {
+  max-width: 100%;
+  height: auto;
+  background-color: var(--main-background);
+}
+
+a#downloadLink {
+  margin-top: 0.5rem;
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  /* TODO */
+}
+
+table th,
+table td {
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  text-align: right;
+}
+
+
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  background: var(--footer-background);
+  border-top: 1px solid var(--border);
+}
+
+.site-footer a {
+  color: var(--footer-link);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}

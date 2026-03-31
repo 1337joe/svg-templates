@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Truncated Cone Template Generator</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <main>
+      <h1>Truncated Cone Template Generator</h1>
+      <p>
+        Creates a template that unwraps the surface of a truncated cone and optionally adds a guide for bending a
+        graphic onto the template.
+      </p>
+      <form id="templateForm">
+        <fieldset>
+          <legend>Truncated Cone Size</legend>
+
+          <div>
+            <label for="units">Units</label>
+            <select id="units" name="units">
+              <option value="mm">Millimeters (mm)</option>
+              <option value="cm">Centimeters (cm)</option>
+              <option value="in">Inches (in)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="topDiameter">Top Diameter</label>
+            <input type="number" id="topDiameter" name="topDiameter" min="0" step="any" required />
+          </div>
+
+          <div>
+            <label for="bottomDiameter">Bottom Diameter</label>
+            <input type="number" id="bottomDiameter" name="bottomDiameter" min="0" step="any" required />
+          </div>
+
+          <div>
+            <label for="height">Vertical Height</label>
+            <input
+              type="number"
+              id="height"
+              name="height"
+              min="0"
+              step="any"
+              required
+              title="The vertical height of the cone measured at a right angle to the base of the cone, not the slant height (along the surface)."
+            />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Graphic Size</legend>
+          <div>
+            <label for="logoSizeX">Width</label>
+            <input type="number" id="logoSizeX" name="logoSizeX" min="0" step="any" />
+          </div>
+
+          <div>
+            <label for="logoSizeY">Height</label>
+            <input type="number" id="logoSizeY" name="logoSizeY" min="0" step="any" />
+          </div>
+
+          <div>
+            <label for="logoHeight">Slant Height on Cone</label>
+            <input
+              type="number"
+              id="logoHeight"
+              name="logoHeight"
+              min="0"
+              step="any"
+              title="The height of the centerline of the graphic as measured along the surface of the cone."
+            />
+          </div>
+
+          <div>
+            <label for="logoMaskingWidth">Masking Width</label>
+            <input type="number" id="logoMaskingWidth" name="logoMaskingWidth" min="0" step="any" />
+          </div>
+        </fieldset>
+        <div class="button-row">
+          <button type="submit">Generate Template</button>
+          <button type="reset">Reset</button>
+          <!-- TODO: reset button to clear inputs and hide template container? -->
+        </div>
+      </form>
+
+      <div id="templateContainer" style="display: none">
+        <span>
+          <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-labeledby="templateTitle">
+            <title id="templateTitle">Truncated Cone Template</title>
+          </svg>
+        </span>
+
+        <span>
+          <a class="button" href="" download="truncated_cone_template.svg" id="downloadLink">Download Template</a></span
+        >
+
+        <table id="templateParameters" aria-label="Template Parameters">
+          <thead>
+            <tr>
+              <th>Reference</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Top Radius</td>
+              <td id="topRadiusValue"></td>
+            </tr>
+            <tr>
+              <td>Bottom Radius</td>
+              <td id="bottomRadiusValue"></td>
+            </tr>
+            <tr>
+              <td>Cone Angle</td>
+              <td id="coneAngleValue"></td>
+            </tr>
+          </tbody>
+          <tbody id="graphicParameters" style="display: none">
+            <tr>
+              <td>Graphic Top Radius</td>
+              <td id="graphicTopRadiusValue"></td>
+            </tr>
+            <tr>
+              <td>Graphic Center Radius</td>
+              <td id="graphicCenterRadiusValue"></td>
+            </tr>
+            <tr>
+              <td>Graphic Bottom Radius</td>
+              <td id="graphicBottomRadiusValue"></td>
+            </tr>
+            <tr>
+              <td>Graphic Angle</td>
+              <td id="graphicAngleValue"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="instructions">
+        <h1>Instructions</h1>
+        <p>
+          This template was created to assist in wrapping graphics around a pint glass shaped like a truncated cone
+          using Inkscape.
+        </p>
+        <p>
+          Start by measuring your cone (glass) across the top and bottom and from the table to the top (vertical, not
+          along the cone surface). Then, if you want to add a graphic to the conte template input the dimensions of the
+          graphic and measure (along the cone surface) the height you want to place the center of it. If you want extra
+          masking around the graphic, such as for acid etching, you can set that as well. Once all your measurements are
+          in click "Generate Template", verify the template looks correct, then download it and open it in Inkscape.
+        </p>
+        <p>
+          Once you're in Inkscape, import your graphic into the Logo layer and resize it to be approximately the desired
+          final size. Make sure snapping is turned on for cusp and smooth nodes, then open the Path Effects panel and
+          add a "Bend Path" effect to the graphic. In the Bend Path settings select "Edit on-canvas", then snap the left
+          and right anchor points to the cusp nodes that end the center line of the logo placeholder. Once that is done,
+          drag the middle of the path through the graphic and snap it to the midpoint of the center line to match its
+          curve.
+        </p>
+        <p>
+          Now that the graphic is aligned and curved appropriately you can delete the "Logo Placeholder" and the "Full
+          Template" layer, then export your final design along with the "Logo Surrounding Mask" (for alignment to the
+          top of the glass, even if you don't need it for masking) to your cutting machine software.
+        </p>
+      </div>
+    </main>
+
+    <footer class="site-footer" aria-label="External links">
+      <a href="https://github.com/rogerjr/svg-templates" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+      <a href="https://ko-fi.com/w3asel" target="_blank" rel="noopener noreferrer">Support me on Ko-fi</a>
+    </footer>
+
+    <script type="module" src="js/truncated-cone.js"></script>
+  </body>
+</html>
