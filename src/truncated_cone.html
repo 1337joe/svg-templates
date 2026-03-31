@@ -79,11 +79,15 @@
             <label for="logoMaskingWidth">Masking Width</label>
             <input type="number" id="logoMaskingWidth" name="logoMaskingWidth" min="0" step="any" />
           </div>
+
+          <div>
+            <label for="logoAlignmentMarker">Alignment Tab Size</label>
+            <input type="number" id="logoAlignmentMarker" name="logoAlignmentMarker" min="0" step="any" />
+          </div>
         </fieldset>
         <div class="button-row">
           <button type="submit">Generate Template</button>
           <button type="reset">Reset</button>
-          <!-- TODO: reset button to clear inputs and hide template container? -->
         </div>
       </form>
 
@@ -149,9 +153,10 @@
         <p>
           Start by measuring your cone (glass) across the top and bottom and from the table to the top (vertical, not
           along the cone surface). Then, if you want to add a graphic to the conte template input the dimensions of the
-          graphic and measure (along the cone surface) the height you want to place the center of it. If you want extra
-          masking around the graphic, such as for acid etching, you can set that as well. Once all your measurements are
-          in click "Generate Template", verify the template looks correct, then download it and open it in Inkscape.
+          graphic and measure (along the cone surface) the height you want to place the center of it. You can also add
+          extra masking around the graphic, such as for acid etching, and alignment tabs to make it easier to center
+          horizontally. Once all your measurements are in click "Generate Template", verify the template looks correct,
+          then download it and open it in Inkscape.
         </p>
         <p>
           Once you're in Inkscape, import your graphic into the Logo layer and resize it to be approximately the desired

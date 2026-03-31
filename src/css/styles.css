@@ -121,7 +121,6 @@ a#downloadLink {
 table {
   border-collapse: collapse;
   margin-top: 0.5rem;
-  /* TODO */
 }
 
 table th,
@@ -130,7 +129,6 @@ table td {
   padding: 0.5rem;
   text-align: right;
 }
-
 
 .site-footer {
   position: fixed;
