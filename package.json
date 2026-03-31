@@ -5,13 +5,16 @@
   "main": "src/js/main.js",
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest watch"
+    "test:watch": "vitest watch",
+    "format": "prettier --write --list-different .",
+    "format:check": "prettier --check ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "prettier": "^3.8.1",
     "vitest": "^4.1.0"
   }
 }
