@@ -1,0 +1,38 @@
+name: Unit Tests and Coverage
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+
+jobs:
+  test-and-coverage:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests with coverage
+        run: npm run test:coverage
+
+      - name: Report coverage for changed files
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file-coverage-mode: changes
