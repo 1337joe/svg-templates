@@ -1,25 +1,4 @@
-/**
- * Given the measurable dimensions of a truncated cone, calcualtes the parameters needed to unwrap the outer surface of the cone into a flat template.
- * @param {number} dMax The outer diameter of the truncated cone.
- * @param {number} dMin The diameter at the point of truncation.
- * @param {number} h The height of the truncated cone.
- * @returns {Object}
- */
-export function truncatedConeParameters(dMax, dMin, h) {
-  const arcLengthTop = Math.PI * dMax;
-  const arcLengthBottom = Math.PI * dMin;
-  const slantHeight = Math.sqrt(Math.pow(h, 2) + Math.pow((dMax - dMin) / 2, 2));
-
-  const innerRadius = (arcLengthBottom * slantHeight) / (arcLengthTop - arcLengthBottom);
-  const coneAngleRad = arcLengthBottom / innerRadius;
-  const outerRadius = innerRadius + slantHeight;
-
-  return {
-    coneAngleRad,
-    innerRadius,
-    outerRadius,
-  };
-}
+/* General functions for creating Inkscape-compatible SVG templates. */
 
 const nsSvg = "http://www.w3.org/2000/svg";
 const nsInkscape = "http://www.inkscape.org/namespaces/inkscape";
@@ -60,3 +39,30 @@ function addGroup(svg, label) {
 }
 
 export { nsSvg, nsInkscape, initSvg, addGroup };
+
+/* Functions for truncated cone calculations. */
+
+/**
+ * Given the measurable dimensions of a truncated cone, calcualtes the parameters needed to unwrap the outer surface of the cone into a flat template.
+ * @param {number} dMax The outer diameter of the truncated cone.
+ * @param {number} dMin The diameter at the point of truncation.
+ * @param {number} h The height of the truncated cone.
+ * @returns {Object}
+ */
+function truncatedConeParameters(dMax, dMin, h) {
+  const arcLengthTop = Math.PI * dMax;
+  const arcLengthBottom = Math.PI * dMin;
+  const slantHeight = Math.sqrt(Math.pow(h, 2) + Math.pow((dMax - dMin) / 2, 2));
+
+  const innerRadius = (arcLengthBottom * slantHeight) / (arcLengthTop - arcLengthBottom);
+  const coneAngleRad = arcLengthBottom / innerRadius;
+  const outerRadius = innerRadius + slantHeight;
+
+  return {
+    coneAngleRad,
+    innerRadius,
+    outerRadius,
+  };
+}
+
+export { truncatedConeParameters };
