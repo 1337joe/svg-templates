@@ -39,15 +39,7 @@
 
           <div>
             <label for="height">Vertical Height</label>
-            <input
-              type="number"
-              id="height"
-              name="height"
-              min="0"
-              step="any"
-              required
-              title="The vertical height of the cone measured at a right angle to the base of the cone, not the slant height (along the surface)."
-            />
+            <input type="number" id="height" name="height" min="0" step="any" required />
           </div>
         </fieldset>
 
@@ -65,14 +57,7 @@
 
           <div>
             <label for="logoHeight">Slant Height on Cone</label>
-            <input
-              type="number"
-              id="logoHeight"
-              name="logoHeight"
-              min="0"
-              step="any"
-              title="The height of the centerline of the graphic as measured along the surface of the cone."
-            />
+            <input type="number" id="logoHeight" name="logoHeight" min="0" step="any" />
           </div>
 
           <div>
@@ -91,9 +76,10 @@
         </div>
       </form>
 
-      <div id="templateContainer" style="display: none">
+      <div id="templateContainer" aria-live="polite" style="display: none">
+        <h2>Generated Template</h2>
         <span>
-          <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-labeledby="templateTitle">
+          <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="templateTitle">
             <title id="templateTitle">Truncated Cone Template</title>
           </svg>
         </span>
@@ -102,11 +88,14 @@
           <a class="button" href="" download="truncated_cone_template.svg" id="downloadLink">Download Template</a></span
         >
 
-        <table id="templateParameters" aria-label="Template Parameters">
+        <table id="templateParameters">
+          <caption>
+            Template Parameters
+          </caption>
           <thead>
             <tr>
-              <th>Reference</th>
-              <th>Value</th>
+              <th scope="col">Reference</th>
+              <th scope="col">Value</th>
             </tr>
           </thead>
           <tbody>
@@ -145,18 +134,18 @@
       </div>
 
       <div id="instructions">
-        <h1>Instructions</h1>
+        <h2>Instructions</h2>
         <p>
           This template was created to assist in wrapping graphics around a pint glass shaped like a truncated cone
           using Inkscape.
         </p>
         <p>
-          Start by measuring your cone (glass) across the top and bottom and from the table to the top (vertical, not
-          along the cone surface). Then, if you want to add a graphic to the conte template input the dimensions of the
-          graphic and measure (along the cone surface) the height you want to place the center of it. You can also add
-          extra masking around the graphic, such as for acid etching, and alignment tabs to make it easier to center
-          horizontally. Once all your measurements are in click "Generate Template", verify the template looks correct,
-          then download it and open it in Inkscape.
+          Start by measuring your cone (glass) across the top and bottom and from the table to the top (along a vertical
+          path, not along the cone surface). Then, if you want to add a graphic to the cone template input the
+          dimensions of the graphic and measure (along the cone surface) the height you want to place the center of it.
+          You can also add extra masking around the graphic, such as for acid etching, and alignment tabs to make it
+          easier to center horizontally. Once all your measurements are in click "Generate Template", verify the
+          template looks correct, then download it and open it in Inkscape.
         </p>
         <p>
           Once you're in Inkscape, import your graphic into the Logo layer and resize it to be approximately the desired
