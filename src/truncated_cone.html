@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self';" />
     <title>Truncated Cone Template Generator</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
@@ -76,7 +77,7 @@
         </div>
       </form>
 
-      <div id="templateContainer" aria-live="polite" style="display: none">
+      <div id="templateContainer" aria-live="polite" class="hidden">
         <h2>Generated Template</h2>
         <span>
           <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="templateTitle">
@@ -112,7 +113,7 @@
               <td id="coneAngleValue"></td>
             </tr>
           </tbody>
-          <tbody id="graphicParameters" style="display: none">
+          <tbody id="graphicParameters" class="hidden">
             <tr>
               <td>Graphic Top Radius</td>
               <td id="graphicTopRadiusValue"></td>

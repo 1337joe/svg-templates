@@ -24,7 +24,7 @@ function initSvg(svg, title) {
 /**
  * Adds an SVG group element to the provided SVG element with the specified label for Inkscape layer support.
  * @param {SVGSVGElement} svg The SVG element to which the group will be added.
- * @param {string} label The Inkscapelabel to set for the group element.
+ * @param {string} label The Inkscape label to set for the group element.
  * @returns {SVGGElement} The created SVG group element.
  */
 function addGroup(svg, label) {

@@ -48,6 +48,10 @@ p {
   color: var(--muted);
 }
 
+.hidden {
+  display: none;
+}
+
 input,
 button,
 a.button {

@@ -72,7 +72,7 @@ function updateTemplateResults(event) {
 
   if (topDiameter == bottomDiameter) {
     // Handle simple case of a cylinder
-    templateParametersTable.style.display = "none";
+    templateParametersTable.classList.add("hidden");
 
     const templateWidth = Math.PI * topDiameter;
     const templateHeight = height;
@@ -134,8 +134,8 @@ function updateTemplateResults(event) {
   } else {
     // calculate the cone parameters
     const flip = topDiameter < bottomDiameter;
-    var maxD = flip ? bottomDiameter : topDiameter;
-    var minD = flip ? topDiameter : bottomDiameter;
+    let maxD = flip ? bottomDiameter : topDiameter;
+    let minD = flip ? topDiameter : bottomDiameter;
     const fullCone = truncatedConeParameters(maxD, minD, height);
 
     const halfAngle = fullCone.coneAngleRad / 2;
@@ -152,11 +152,11 @@ function updateTemplateResults(event) {
       flip ? fullCone.outerRadius : fullCone.innerRadius,
       fullCone.coneAngleRad,
     );
-    templateParametersTable.style.display = "block";
+    templateParametersTable.classList.remove("hidden");
 
     const minX = largeArcFlag ? -fullCone.outerRadius : outerStart.x;
     const maxX = largeArcFlag ? fullCone.outerRadius : -outerStart.x;
-    var minY, maxY;
+    let minY, maxY;
     if (flip) {
       outerStart.y = -outerStart.y;
       innerStart.y = -innerStart.y;
@@ -197,8 +197,8 @@ function updateTemplateResults(event) {
       const logoOuterStart = polar(logoCenterRadius + logoHeight / 2, -logoHalfAngle);
       const logoCenterStart = polar(logoCenterRadius, -logoHalfAngle);
       const logoInnerStart = polar(logoCenterRadius - logoHeight / 2, -logoHalfAngle);
-      var logoMaskTopRadius, logoMaskBottomRadius;
-      var logoMaskOuterStart, logoMaskInnerStart;
+      let logoMaskTopRadius, logoMaskBottomRadius;
+      let logoMaskOuterStart, logoMaskInnerStart;
       if (flip) {
         logoOuterStart.y = -logoOuterStart.y;
         logoCenterStart.y = -logoCenterStart.y;
@@ -223,7 +223,7 @@ function updateTemplateResults(event) {
         logoCenterRadius - ((flip ? -1 : 1) * logoHeight) / 2,
         2 * logoHalfAngle,
       );
-      graphicParametersTable.style.display = null;
+      graphicParametersTable.classList.remove("hidden");
 
       const logoLayer = addGroup(svg, "Logo");
 
@@ -269,16 +269,16 @@ function updateTemplateResults(event) {
       logo.setAttributeNS(nsInkscape, "inkscape:label", "Logo Placeholder");
       logoLayer.appendChild(logo);
     } else {
-      graphicParametersTable.style.display = "none";
+      graphicParametersTable.classList.add("hidden");
     }
   }
 
   downloadLink.setAttribute("href", "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.outerHTML));
-  templateContainer.style.display = "block";
+  templateContainer.classList.remove("hidden");
 }
 
 function resetTemplateResults() {
-  templateContainer.style.display = "none";
+  templateContainer.classList.add("hidden");
 }
 
 form.addEventListener("submit", updateTemplateResults);
