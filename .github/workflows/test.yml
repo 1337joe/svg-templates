@@ -1,22 +1,32 @@
 name: Unit Tests and Coverage
 
 on:
-  push:
-    branches:
-      - "main"
   pull_request:
 
 jobs:
-  test-and-coverage:
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          ## Set repository to correctly checkout from forks
+          - artifact: main
+            repository: ${{ github.event.pull_request.base.repo.full_name }}
+            branch: ${{ github.event.pull_request.base.ref }}
+
+          - artifact: pull-request
+            repository: ${{ github.event.pull_request.head.repo.full_name }}
+            branch: ${{ github.event.pull_request.head.sha }}
 
     permissions:
       contents: read
-      pull-requests: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          repository: ${{ matrix.repository }}
+          ref: ${{ matrix.branch }}
 
       - name: Setup Node.js
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
@@ -30,9 +40,33 @@ jobs:
       - name: Run unit tests with coverage
         run: npm run test:coverage
 
-      - name: Report coverage for changed files
-        if: always()
-        uses: davelosert/vitest-coverage-report-action@c0c9b09c93750ee1d8335d14e94ce3d6fc61df50 # v2
+      - name: Upload coverage
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          file-coverage-mode: changes
+          name: coverage-${{ matrix.artifact }}
+          path: coverage
+
+  report-coverage:
+    needs: test
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Download coverage artifacts (pull request)
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: coverage-pull-request
+          path: coverage
+
+      - name: Download coverage artifacts (main)
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: coverage-main
+          path: coverage-main
+
+      - name: Report coverage changes
+        uses: davelosert/vitest-coverage-report-action@d63aa97db4c0319f304f1787689de1ca548365cf # v2
+        with:
+          json-summary-compare-path: coverage-main/coverage-summary.json
