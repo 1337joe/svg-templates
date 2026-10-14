@@ -68,6 +68,6 @@ jobs:
           path: coverage-main
 
       - name: Report coverage changes
-        uses: davelosert/vitest-coverage-report-action@d63aa97db4c0319f304f1787689de1ca548365cf # v2
+        uses: davelosert/vitest-coverage-report-action@8f86cfb56ed6d5613ea8cdc5259f207fbfd51ece # v2
         with:
           json-summary-compare-path: coverage-main/coverage-summary.json
